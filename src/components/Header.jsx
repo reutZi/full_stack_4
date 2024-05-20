@@ -1,5 +1,3 @@
-import React from 'react';
-
 function Header({title, button, handleClick}){
    
     return (

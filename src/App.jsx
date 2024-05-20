@@ -2,7 +2,6 @@ import './App.css';
 import React, { useState } from 'react';
 import Header from './components/Header';
 import Content from './components/Content';
-import Footer from './components/Footer';
 
 function App() {
   const [getTo100, setGetTo100] = useState(false);
@@ -18,7 +17,6 @@ function App() {
           handleClick = {handleClick}
       />
       <Content name = {getTo100 ? "Get To 100" : "Text Editor"}/>
-      <Footer />
     </div>
   );
 }
