@@ -12,7 +12,7 @@ function App() {
           title = {getTo100 ? "Get To 100" : "Text Editor"}
           button = {getTo100 ? "Text Editor" : "Get To 100"}
       />
-      <Content />
+      <Content name = {getTo100 ? "Get To 100" : "Text Editor"}/>
       <Footer />
     </div>
   );
