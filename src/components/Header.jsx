@@ -1,10 +1,11 @@
 import React from 'react';
 
-function Header({title, button}){
+function Header({title, button, handleClick}){
+   
     return (
         <header>
             <p className='header-title'>{title}</p>
-            <button className='header-button'>{button}</button>
+            <button className='header-button' onClick = {handleClick}>{button}</button>
         </header>
     );
 };
