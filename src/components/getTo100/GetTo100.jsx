@@ -1,35 +1,46 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Game from './Game';
 import Records from './Records';
 import Modal from './Modal';
 import Registration from './Registration';
 import classes from './GetTo100.module.css';
 import GameBoard from './GameBoard';
+import Buttons from './Buttons';
 
 function GetTo100() {
     const [newGame, setNewGame] = useState(false);
     const [openingScreen, setOpeningScreen] = useState(true);
     const [gameBoard, setGameBoard] = useState(false);
+    const [showButtons, setShowButtons] = useState(false);
+    const [gameStarted, setGameStarted] = useState(false); 
     const [users, setUsers] = useState([]);
     const [players, setPlayers] = useState([]);
 
-    function loadUsers(){
-        setUsers(JSON.parse(localStorage.getItem('users') || []));
-        console.log("load" , users);
+    useEffect(() => {
+        loadUsers();
+    }, []);
+
+    function loadUsers() {
+        const storedUsers = JSON.parse(localStorage.getItem('users') || '[]');
+        setUsers(storedUsers);
     }
 
     function submit(userName, password) {
-        loadUsers();
-        console.log(users);
         const user = users.find(user => user.userName === userName);
-        if(user){
-            if (user.password === password){
-                setNewGame(false);
-                setGameBoard(true);
+        if (user) {
+            if (user.password === password) {
+                if (!players.includes(user)) {
+                    setNewGame(false);
+                    setGameBoard(true);
+                    setShowButtons(true);
+                    setPlayers([...players, user]);
+                }else{
+                    alert('This user is already in the game.');
+                }
             } else {
                 alert('Password is not correct, try again.');
             }
-        }else{
+        } else {
             alert('This username does not exist.');
         }
     }
@@ -37,6 +48,15 @@ function GetTo100() {
     function openNewGame() {
         setNewGame(true);
         setOpeningScreen(false);
+    }
+
+    function handleStartGame() {
+        setShowButtons(true);
+        setGameStarted(true);
+    }
+
+    function handleAddPlayer() {
+        setNewGame(true);
     }
 
     return (
@@ -51,7 +71,9 @@ function GetTo100() {
 
             {openingScreen && (<Records openNewGame={openNewGame} />)}
 
-            {gameBoard && (<GameBoard players={players}/>)}
+            {showButtons && (<Buttons handleStartGame={handleStartGame} handleAddPlayer={handleAddPlayer} />)}
+
+            {gameBoard && (<GameBoard players={players} gameStarted={gameStarted}/>)}
         </>
     );
 }

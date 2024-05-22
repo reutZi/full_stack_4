@@ -27,14 +27,16 @@ function Records({openNewGame}) {
       <h1>Top 3 Players</h1>
       <div className={classes.player_cards}>
         {topPlayers ? 
-        topPlayers.map((player, index) => (
+        topPlayers.map((player, index) => {
+        return (
           <PlayerRecords 
-          key={index} 
-          userName={player.userName} 
-          record={player.record} />
-        ))
-        : <h2>No records yet!</h2>
-        }
+            index={index} 
+            userName={player.userName} 
+            record={player.record} 
+          />
+        );
+      })
+      : <h2>No records yet!</h2> }
       </div>
       <button onClick={openNewGame}>Open new game</button>
     </div>

@@ -67,7 +67,7 @@
     width: 200px;
 }
 
-.card button{
+.card button {
     margin: 2px;
     width: 40px;
     height: 40px;
@@ -83,7 +83,13 @@
     background-color: #0056b3;
 }
 
-.card h2{
+.card button:disabled {
+    background-color: grey;
+    color: darkgray;
+    cursor: not-allowed;
+}
+
+.card h2 {
     margin: 10px 0;
 }
 
@@ -92,49 +98,49 @@
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 10px;
     justify-items: center;
-  }
+}
 
 
 /* Registration */
 
-.registration h1 { 
-	color: #76a1c7; 
-} 
+.registration h1 {
+    color: #76a1c7;
+}
 
-.registration label { 
-	display: block; 
-	width: 100%; 
-	margin-top: 10px; 
-	margin-bottom: 5px; 
-	text-align: left; 
-	color: #555; 
-	font-weight: bold; 
-} 
+.registration label {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    text-align: left;
+    color: #555;
+    font-weight: bold;
+}
 
-.registration input { 
-	display: block; 
-	width: 100%; 
-	margin-bottom: 15px; 
-	padding: 10px; 
-	box-sizing: border-box; 
-	border: 1px solid #ddd; 
-	border-radius: 5px; 
-} 
+.registration input {
+    display: block;
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
 
 .registration a {
-	text-decoration: none
+    text-decoration: none
 }
 
 .registration button {
-	padding: 10px;
-	border-radius: 10px;
-	margin-top: 10px;
-	margin-bottom: 15px;
-	border: none;
-	color: white;
-	cursor: pointer;
-	background-color: #34036c;
-	font-size: 1rem;
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    background-color: #34036c;
+    font-size: 1rem;
 }
 
 
@@ -144,38 +150,70 @@
     padding: 20px;
     background-color: #f0f0f0;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin: 20px auto;
     max-width: 800px;
-  }
-  
+}
+
 .records h1 {
     margin-bottom: 20px;
     font-size: 2em;
     color: #333;
 }
-  
+
 .records button {
     padding: 10px;
-	border-radius: 10px;
-	margin-top: 10px;
-	margin-bottom: 15px;
-	border: none;
-	color: white;
-	cursor: pointer;
-	background-color: #34036c;
-	font-size: 1rem;
-  }
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    background-color: #34036c;
+    font-size: 1rem;
+}
 
-  
-  .records .player_cards {
+.records .player_cards {
     display: flex;
     justify-content: center;
-    gap: 20px; /* Add space between the cards */
-  }
-  
+    gap: 20px;
+    /* Add space between the cards */
+}
+
 .records button:hover {
     background-color: #0056b3;
-    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+.top_buttons button {
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    background-color: #34036c;
+    font-size: 1rem;
+    position: relative;
+}
+
+
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1;
   }
   
+  .modal {
+    border: none;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    overflow: hidden;
+    z-index: 1;
+  }

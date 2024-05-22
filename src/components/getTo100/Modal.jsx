@@ -1,4 +1,4 @@
-import classes from './Modal.module.css';
+import classes from './GetTo100';
 
 function Modal({ children , onClose }){
     return (

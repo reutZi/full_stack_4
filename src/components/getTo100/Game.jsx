@@ -1,7 +1,7 @@
 import classes from './GetTo100.module.css';
 import { useState } from 'react';
 
-function Game({userName}){
+function Game({userName, gameStarted}){
     const getRandomNumber = () => Math.floor(Math.random() * 100);
 
     const [number, setNumber] = useState(getRandomNumber);
@@ -27,20 +27,15 @@ function Game({userName}){
       setMoves(prev => prev + 1);
     };
   
-    const handleReset = () => {
-      setNumber(getRandomNumber);
-      setMoves(0);
-    };
-  
     return (
       <div className={classes.card}>
         <h2>{userName}</h2>
         <h2>{number}</h2>
         <h2>Moves: {moves}</h2>
-        <button onClick={handleAdd}>+1</button>
-        <button onClick={handleSubtract}>-1</button>
-        <button onClick={handleMultiply}>*2</button>
-        <button onClick={handleDivide}>/2</button>
+        <button onClick={handleAdd} disabled={!gameStarted}>+1</button>
+        <button onClick={handleSubtract} disabled={!gameStarted}>-1</button>
+        <button onClick={handleMultiply} disabled={!gameStarted}>*2</button>
+        <button onClick={handleDivide} disabled={!gameStarted}>/2</button>
         <br />
         {number === 100 && <h2>Congratulations! You've reached 100 in {moves} moves.</h2>}
       </div>
