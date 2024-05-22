@@ -217,3 +217,12 @@
     overflow: hidden;
     z-index: 1;
   }
+
+  .buttonA{
+    background: none!important;
+    border: none;
+    padding: 0!important;
+    font-family: arial, sans-serif;
+    color: #069!important;
+    cursor: pointer;
+  }

@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import classes from './GetTo100.module.css';
 
-function Registration({ submit, handleSignUp }) {
+function SignUp({ submit, openNewGame }) {
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
+    const [passwordValid, setPasswordValid] = useState('');
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        submit(userName, password);
+        console.log('passwordValid in handle submit: ', passwordValid);
+        submit(userName, password, passwordValid);
     };
 
     return (
@@ -38,19 +40,31 @@ function Registration({ submit, handleSignUp }) {
                     required
                 />
 
+                <label htmlFor="passwordValid">
+                    Retype Password:
+                </label>
+                <input
+                    type="password"
+                    id="passwordValid"
+                    placeholder="Enter your Password"
+                    value={passwordValid}
+                    onChange={(e) => setPasswordValid(e.target.value)}
+                    required
+                />
+
                 <div className="wrap">
                     <button type="submit">
                         Submit
                     </button>
                 </div>
             </form>
-            <p>Don't have an account?
-                <button className={classes.buttonA} onClick={handleSignUp}>
-                    Create new one
+            <p>Already have an account?
+                <button className={classes.buttonA} onClick={openNewGame}>
+                    Sign up
                 </button>
             </p>
         </div>
     );
 }
 
-export default Registration;
+export default SignUp;
