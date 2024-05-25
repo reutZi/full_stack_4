@@ -9,7 +9,7 @@ function Game({ userName, gameStarted, isActive, nextTurn, addScore, removePlaye
   const [hasWon, setHasWon] = useState(false);
 
   const win = (num) => {
-    if (num >= 100) {
+    if (num === 100) {
       setHasWon(true);
       addScore(userName, moves);
       const userChoice = window.confirm("Congratulations! You won the game!!\n\nWhat would you like to do?\n\nClick OK to continue playing, or Cancel to end the game.");

@@ -12,7 +12,7 @@ function Registration({ submit, handleSignUp }) {
 
     return (
         <div className={classes.registration}>
-            <h3>Sign In For the Game</h3>
+            <h3>Sign In</h3>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="userName">
                     Username:

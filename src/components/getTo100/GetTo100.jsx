@@ -6,10 +6,9 @@ import classes from './GetTo100.module.css';
 import GameBoard from './GameBoard';
 import Buttons from './Buttons';
 import SignUp from './SignUp';
+import Profile from './Profile';
 
-function GetTo100() {
-    const [newGame, setNewGame] = useState(false);
-    const [openingScreen, setOpeningScreen] = useState(true);
+function GetTo100({profilePage, newGame, setNewGame, openingScreen, setOpeningScreen}) {
     const [gameBoard, setGameBoard] = useState(false);
     const [showButtons, setShowButtons] = useState(false);
     const [gameStarted, setGameStarted] = useState(false);
@@ -17,6 +16,8 @@ function GetTo100() {
     const [players, setPlayers] = useState([]);
     const [activePlayerIndex, setActivePlayerIndex] = useState(0);
     const [signUp, setSignUp] = useState(false);
+    var profileData;
+   
 
     useEffect(() => {
         loadUsers();
@@ -88,6 +89,11 @@ function GetTo100() {
         if (user) {
             if (user.password === password) {
                 if (!players.some(player => player.userName === userName)) {
+                    if(profilePage){
+                        setNewGame(false);
+                        profileData = <Profile userName ={userName} scores = {user.scores}/>;
+                        return;
+                    }
                     setNewGame(false);
                     setGameBoard(true);
                     setShowButtons(true);
@@ -189,6 +195,8 @@ function GetTo100() {
                     removePlayer={removePlayer}
                 />
             )}
+
+            {profilePage && !newGame && (profileData)}
         </>
     );
 }
