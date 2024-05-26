@@ -9,8 +9,10 @@ function Header({title, button, handleClick, profilePage,handleHomePage, openPro
     return (
         <header>
             <p className='header-title' onClick={handleHomePage}>{title}</p>
+            <div className="header-buttons-container">
             {profileButton}
             <button className='header-button' onClick = {handleClick}>{button}</button>
+            </div>
         </header>
     );
 };

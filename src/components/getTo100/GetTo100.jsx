@@ -7,6 +7,8 @@ import GameBoard from './GameBoard';
 import Buttons from './Buttons';
 import SignUp from './SignUp';
 import Profile from './Profile';
+
+
 function GetTo100(props) {
 
     const { profilePage,
