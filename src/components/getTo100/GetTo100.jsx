@@ -7,93 +7,93 @@ import GameBoard from './GameBoard';
 import Buttons from './Buttons';
 import SignUp from './SignUp';
 import Profile from './Profile';
+function GetTo100(props) {
 
-function GetTo100({profilePage, newGame, setNewGame, openingScreen, setOpeningScreen}) {
-    const [gameBoard, setGameBoard] = useState(false);
-    const [showButtons, setShowButtons] = useState(false);
+    const { profilePage,
+        newGame,
+        setNewGame,
+        openingScreen,
+        setOpeningScreen,
+        setGameBoard,
+        gameBoard,
+        setShowButtons,
+        showButtons } = props;
+
+
     const [gameStarted, setGameStarted] = useState(false);
     const [users, setUsers] = useState([]);
     const [players, setPlayers] = useState([]);
     const [activePlayerIndex, setActivePlayerIndex] = useState(0);
     const [signUp, setSignUp] = useState(false);
-    var profileData;
-   
+    const [profileData, setProfileData] = useState(null);
 
     useEffect(() => {
         loadUsers();
     }, []);
 
-    function loadUsers() {
+    const loadUsers = () => {
         const storedUsers = JSON.parse(localStorage.getItem('users') || '[]');
         setUsers(storedUsers);
-    }
+    };
 
-    function saveUsers(updatedUsers) {
+    const saveUsers = (updatedUsers) => {
         localStorage.setItem('users', JSON.stringify(updatedUsers));
         setUsers(updatedUsers);
-    }
+    };
 
-    function addIdToPlayers() {
+    const addIdToPlayers = () => {
         setPlayers(players.map((player, index) => ({
             ...player,
             id: index
         })));
-    }
+    };
 
-    function checkUserName(userName) {
-        if (users && users.some((user) => user.userName === userName)) {
+    const checkUserName = (userName) => {
+        if (users.some((user) => user.userName === userName)) {
             alert("Username already exists. Please choose another one.");
             return false;
         }
-
         return true;
-    }
+    };
 
-    function checkPassword(password, passwordValid) {
-        
-        console.log('passwordValid: ', passwordValid);
-        console.log('password: ', password);
+    const checkPassword = (password, passwordValid) => {
         if (password !== passwordValid) {
             alert("Passwords do not match. Please try again.");
             return false;
         }
-
         if (password.length < 6) {
             alert("Password must be at least 6 characters long.");
             return false;
         }
-
         if (!/^[a-zA-Z0-9]+$/.test(password)) {
             alert("Password can only contain letters and numbers.");
             return false;
         }
-
         return true;
-    }
+    };
 
-    function addUser(userName, password, passwordValid) {
+    const addUser = (userName, password, passwordValid) => {
         const user = { userName, password, scores: [] };
-
         if (checkUserName(user.userName) && checkPassword(user.password, passwordValid)) {
             setSignUp(false);
             setGameBoard(true);
             setShowButtons(true);
+            const updatedUsers = [...users, user];
             setPlayers([...players, user]);
-            setUsers([...users, user]);
-            saveUsers([...users, user]);
+            saveUsers(updatedUsers);
         }
-    }
+    };
 
-    function submit(userName, password) {
+    const submit = (userName, password) => {
         const user = users.find(user => user.userName === userName);
         if (user) {
             if (user.password === password) {
+                if (profilePage) {
+                    setNewGame(false);
+                    setProfileData(<Profile userName={userName} scores={user.scores} />);
+                    return;
+                }
                 if (!players.some(player => player.userName === userName)) {
-                    if(profilePage){
-                        setNewGame(false);
-                        profileData = <Profile userName ={userName} scores = {user.scores}/>;
-                        return;
-                    }
                     setNewGame(false);
                     setGameBoard(true);
                     setShowButtons(true);
@@ -107,36 +107,33 @@ function GetTo100({profilePage, newGame, setNewGame, openingScreen, setOpeningSc
         } else {
             alert('This username does not exist.');
         }
-    }
+    };
 
-    function openNewGame() {
+    const openNewGame = () => {
         setSignUp(false);
         setNewGame(true);
         setOpeningScreen(false);
-    }
+    };
 
-    function handleStartGame() {
+    const handleStartGame = () => {
         setShowButtons(false);
         setGameStarted(true);
         addIdToPlayers();
-    }
+    };
 
-    function handleAddPlayer() {
+    const handleAddPlayer = () => {
         setNewGame(true);
         setShowButtons(false);
-    }
+    };
 
-    function nextTurn() {
+    const nextTurn = () => {
         setActivePlayerIndex((prevIndex) => {
-            var index = players.findIndex(player => player.id === prevIndex);
-            if (index === players.length - 1) {
-                return players[0].id;
-            }
-            return players[index + 1].id;
+            const index = players.findIndex(player => player.id === prevIndex);
+            return index === players.length - 1 ? players[0].id : players[index + 1].id;
         });
-    }
+    };
 
-    function addScore(userName, score) {
+    const addScore = (userName, score) => {
         const updatedUsers = users.map(user => {
             if (user.userName === userName) {
                 return { ...user, scores: [...user.scores, score] };
@@ -144,24 +141,25 @@ function GetTo100({profilePage, newGame, setNewGame, openingScreen, setOpeningSc
             return user;
         });
         saveUsers(updatedUsers);
-    }
+    };
 
-    function removePlayer(userName) {
+    const removePlayer = (userName) => {
         if (players.length === 1) {
             emptyBoard();
+        } else {
+            setPlayers(players.filter(player => player.userName !== userName));
         }
-        setPlayers(players.filter(player => player.userName !== userName));
-    }
+    };
 
-    function emptyBoard() {
+    const emptyBoard = () => {
         setOpeningScreen(true);
         setGameBoard(false);
-    }
+    };
 
-    function handleSignUp() {
+    const handleSignUp = () => {
         setSignUp(true);
         setNewGame(false);
-    }
+    };
 
     return (
         <>
@@ -181,9 +179,9 @@ function GetTo100({profilePage, newGame, setNewGame, openingScreen, setOpeningSc
                 </Modal>
             )}
 
-            {openingScreen && (<Records openNewGame={openNewGame} />)}
+            {openingScreen && <Records openNewGame={openNewGame} />}
 
-            {showButtons && (<Buttons handleStartGame={handleStartGame} handleAddPlayer={handleAddPlayer} />)}
+            {showButtons && <Buttons handleStartGame={handleStartGame} handleAddPlayer={handleAddPlayer} />}
 
             {gameBoard && (
                 <GameBoard
@@ -196,7 +194,7 @@ function GetTo100({profilePage, newGame, setNewGame, openingScreen, setOpeningSc
                 />
             )}
 
-            {profilePage && !newGame && (profileData)}
+            {profilePage && !newGame && profileData}
         </>
     );
 }

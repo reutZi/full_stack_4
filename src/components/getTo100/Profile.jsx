@@ -1,7 +1,7 @@
 import classes from './GetTo100.module.css';
 
 function Profile({ userName, scores }) {
-    let record = Math.max(...scores);
+    let record = Math.min(...scores);
 
   return (
     <div className={classes.card}>

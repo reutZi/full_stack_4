@@ -1,17 +1,14 @@
-function Header({title, button, handleClick, setProfilePage, setNewGame, setOpeningScreen}){
+function Header({title, button, handleClick, profilePage,handleHomePage, openProfilePage}){
 
-    const profilePage = () => {
-        setOpeningScreen(false);
-        setProfilePage(true);
-        setNewGame(true);
-    }
+    let profileButton = (title === "Get To 100" ? 
+        (profilePage ? 
+            <button className='header-button' onClick={handleHomePage}>Get To 100</button> :
+            <button className='header-button' onClick={openProfilePage}>My Profile</button>) :
+        null);
 
-    let profileButton = (title === "Get To 100" && 
-    <button className='header-button' onClick = {profilePage}>My Profile</button>);
-   
     return (
         <header>
-            <p className='header-title'>{title}</p>
+            <p className='header-title' onClick={handleHomePage}>{title}</p>
             {profileButton}
             <button className='header-button' onClick = {handleClick}>{button}</button>
         </header>
