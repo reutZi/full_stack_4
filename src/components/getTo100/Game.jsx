@@ -25,7 +25,7 @@ function Game({ userName, gameStarted, isActive, nextTurn, addScore, removePlaye
     if (!hasWon) {
       win(number);
     }
-  }, [number, hasWon]); // Run win function whenever number or hasWon changes
+  }, [number, hasWon]); 
 
   const handleOperation = (operation) => {
     const newNumber = Math.floor(eval(`${number} ${operation}`));
