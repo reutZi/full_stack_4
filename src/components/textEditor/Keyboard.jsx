@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from './TextEditor.module.css';
-const Keyboard = ({ language , setText,text}) => {
+const Keyboard = ({ language , setText}) => {
   const keys = (language === 'en'?['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']:
   (language === 'he'? ['א','ב','ג','ד','ה','ו','ז','ח','ט','י','כ','ל','מ','נ','ס','ע','פ','צ','ק','ר','ש','ת']:
   (language === 'emoji'? ['😀','😁','😂','🤣','😃','😄','😅','😆','😉','😊','😋','😎','😍','😘','🥰']:
@@ -21,7 +21,7 @@ const Keyboard = ({ language , setText,text}) => {
       return prevText.slice(0, -1)});
   }
 
-  function handleEnterClick() {
+function handleEnterClick() {
     setText(prevText => prevText + "</br>");
 }
 
