@@ -1,13 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import classes from './GetTo100.module.css';
 
-function Game({ userName, gameStarted, isActive, nextTurn, addScore, removePlayer}) {
+/**
+ * Game component for the GetTo100 game.
+ * @param {Object} props - The component props.
+ * @param {string} props.userName - The username of the player.
+ * @param {boolean} props.gameStarted - Indicates if the game has started.
+ * @param {boolean} props.isActive - Indicates if it's the player's turn.
+ * @param {Function} props.nextTurn - Function to switch to the next player's turn.
+ * @param {Function} props.addScore - Function to add the player's score.
+ * @param {Function} props.removePlayer - Function to remove the player from the game.
+ * @returns {JSX.Element} The Game component.
+ */
+function Game({ userName, gameStarted, isActive, nextTurn, addScore, removePlayer }) {
+  /**
+   * Generates a random number between 0 and 100.
+   * @returns {number} The random number.
+   */
   const getRandomNumber = () => Math.floor(Math.random() * 100);
 
   const [number, setNumber] = useState(getRandomNumber);
   const [moves, setMoves] = useState(0);
   const [hasWon, setHasWon] = useState(false);
 
+  /**
+   * Checks if the player has won the game.
+   * @param {number} num - The current number.
+   */
   const win = (num) => {
     if (num === 100) {
       setHasWon(true);
@@ -25,8 +44,12 @@ function Game({ userName, gameStarted, isActive, nextTurn, addScore, removePlaye
     if (!hasWon) {
       win(number);
     }
-  }, [number, hasWon]); 
+  }, [number, hasWon]);
 
+  /**
+   * Handles the player's operation.
+   * @param {string} operation - The operation to perform on the number.
+   */
   const handleOperation = (operation) => {
     const newNumber = Math.floor(eval(`${number} ${operation}`));
     setNumber(newNumber);
@@ -34,12 +57,18 @@ function Game({ userName, gameStarted, isActive, nextTurn, addScore, removePlaye
     nextTurn();
   }
 
+  /**
+   * Handles the player choosing to continue playing.
+   */
   const handleContinue = () => {
     setHasWon(false);
     setNumber(getRandomNumber);
     setMoves(0);
   };
 
+  /**
+   * Handles the player choosing to end the game.
+   */
   const handleEndGame = () => {
     removePlayer(userName);
   };

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Header from './components/Header';
 import Content from './components/Content';
 
-function App() {
+function App() { 
   const [getTo100, setGetTo100] = useState(false);
   const [profilePage, setProfilePage] = useState(false);
   const [newGame, setNewGame] = useState(false);
@@ -12,7 +12,7 @@ function App() {
   const [showButtons, setShowButtons] = useState(false);
   const [players, setPlayers] = useState([]);
 
-  const handleClick = ()=>{
+  const handleClick = ()=> { //function to change the game
     setGetTo100(!getTo100);
     if(getTo100){
       setProfilePage(false);
@@ -23,7 +23,7 @@ function App() {
     }
   }
 
-  const openProfilePage = () => {
+  const openProfilePage = () => { //function to open the profile page
     setOpeningScreen(false);
     setProfilePage(true);
     setNewGame(true);
@@ -32,7 +32,7 @@ function App() {
     setPlayers([]);
 }
 
-  const handleHomePage = () => {
+  const handleHomePage = () => { //function to go back to the home page
     if(getTo100){
       setProfilePage(false);
       setOpeningScreen(true); 
