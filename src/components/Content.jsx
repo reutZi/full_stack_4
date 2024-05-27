@@ -10,7 +10,9 @@ function Content(props){
                                                     setGameBoard={props.setGameBoard}
                                                     gameBoard={props.gameBoard}
                                                     setShowButtons={props.setShowButtons}
-                                                    showButtons={props.showButtons}/>
+                                                    showButtons={props.showButtons}
+                                                    setPlayers={props.setPlayers}
+                                                    players={props.players}/>
                                                     : <TextEditor />;
     return (
         <main>

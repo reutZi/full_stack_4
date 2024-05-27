@@ -1,4 +1,4 @@
-function Header({title, button, handleClick, profilePage,handleHomePage, openProfilePage}){
+function Header({title, button, handleClick, profilePage, handleHomePage, openProfilePage}){
 
     let profileButton = (title === "Get To 100" ? 
         (profilePage ? 

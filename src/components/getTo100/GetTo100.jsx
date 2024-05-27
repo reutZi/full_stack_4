@@ -19,12 +19,13 @@ function GetTo100(props) {
         setGameBoard,
         gameBoard,
         setShowButtons,
-        showButtons } = props;
+        showButtons,
+        setPlayers,
+        players} = props;
 
 
     const [gameStarted, setGameStarted] = useState(false);
     const [users, setUsers] = useState([]);
-    const [players, setPlayers] = useState([]);
     const [activePlayerIndex, setActivePlayerIndex] = useState(0);
     const [signUp, setSignUp] = useState(false);
     const [profileData, setProfileData] = useState(null);
@@ -168,7 +169,7 @@ function GetTo100(props) {
             {newGame && (
                 <Modal>
                     <div className={classes.game_grid}>
-                        <Registration submit={submit} handleSignUp={handleSignUp} />
+                        <Registration submit={submit} handleSignUp={handleSignUp} profilePage={profilePage}/>
                     </div>
                 </Modal>
             )}

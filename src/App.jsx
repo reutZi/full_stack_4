@@ -10,9 +10,17 @@ function App() {
   const [openingScreen, setOpeningScreen] = useState(true);
   const [gameBoard, setGameBoard] = useState(false);
   const [showButtons, setShowButtons] = useState(false);
+  const [players, setPlayers] = useState([]);
 
   const handleClick = ()=>{
     setGetTo100(!getTo100);
+    if(getTo100){
+      setProfilePage(false);
+      setOpeningScreen(true); 
+      setNewGame(false);
+      setGameBoard(false);
+      setShowButtons(false);
+    }
   }
 
   const openProfilePage = () => {
@@ -21,6 +29,7 @@ function App() {
     setNewGame(true);
     setGameBoard(false);
     setShowButtons(false);
+    setPlayers([]);
 }
 
   const handleHomePage = () => {
@@ -52,7 +61,9 @@ function App() {
                                   setGameBoard={setGameBoard}
                                   gameBoard={gameBoard}
                                   setShowButtons={setShowButtons}
-                                  showButtons={showButtons}/>
+                                  showButtons={showButtons}
+                                  setPlayers={setPlayers}
+                                  players={players}/>
     </div>
   );
 }

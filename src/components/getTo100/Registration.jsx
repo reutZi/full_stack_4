@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import classes from './GetTo100.module.css';
 
-function Registration({ submit, handleSignUp }) {
+function Registration({ submit, handleSignUp, profilePage }) {
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
 
@@ -44,11 +44,13 @@ function Registration({ submit, handleSignUp }) {
                     </button>
                 </div>
             </form>
-            <p>Don't have an account?
-                <button className={classes.buttonA} onClick={handleSignUp}>
-                    Create new one
-                </button>
-            </p>
+            {!profilePage && (
+                <p>Don't have an account?
+                    <button className={classes.buttonA} onClick={handleSignUp}>
+                        Create new one
+                    </button>
+                </p>
+            )}
         </div>
     );
 }
