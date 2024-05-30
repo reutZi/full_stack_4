@@ -13,9 +13,9 @@ function TextEditor() {
     return (
         <>
             <TextShow styles={style} text={text} />
-            <div className={classes.Keyboard}>
+            <div className={classes.Keyboard}> 
                 <SwitchLanguage setLanguage={setLanguage} />
-                <Keyboard language={language} setText={setText} text={text} />
+                <Keyboard language={language} setText={setText}  style={style} />
                 <ToolBar setStyle={setStyle} />
             </div>
         </>

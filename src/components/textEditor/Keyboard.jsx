@@ -2,7 +2,7 @@ import React from 'react';
 import classes from './TextEditor.module.css';
 
 
-const Keyboard = ({ language , setText}) => {
+const Keyboard = ({ language , setText,style}) => {
   
   const keys = (language === 'en'?['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']:
   (language === 'he'? ['א','ב','ג','ד','ה','ו','ז','ח','ט','י','כ','ל','מ','נ','ס','ע','פ','צ','ק','ר','ש','ת']:
@@ -10,19 +10,38 @@ const Keyboard = ({ language , setText}) => {
     "1234567890()-+=!@#$%&*/}{?.,;".split('')
   )));
 
-  //const keys = language === 'en' ? 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('') :(language === 'he'? 'אבגדהוזחטיכלמנסעפצקרשת'.split('') : ['😀','😁','😂','🤣','😃','😄','😅','😆','😉','😊','😋','😎','😍','😘','🥰']);
   function handleButtonClick(e){
-    setText(prevText => prevText + e.target.innerHTML)
+    
+    let color = style.color;
+    let fontWeight = style.fontWeight;
+    let fontFamily = style.fontFamily;
+    let fontSize = style.fontSize;
+    setText(prevText => prevText + `<span style="color:${color}; font-weight:${fontWeight}; font-family:${fontFamily}; font-size:${fontSize};">${e.target.innerHTML}</span>`);
+    //setText(prevText => prevText + e.target.innerHTML)
   }
 
+
   function handleDelClick() {
-    setText((prevText) => {
-      if(prevText.endsWith("</br>"))
-        {
-          return prevText.slice(0, -"</br>".length);
-        }
-      return prevText.slice(0, -1)});
+
+    setText((text)=>{
+      if(text.endsWith("</br>")){
+        return text.slice(0, -"</br>".length);
+      }
+      const tempDiv = document.createElement('div');
+      tempDiv.innerHTML = text;
+  
+      // Find all <span> elements
+      const spans = tempDiv.querySelectorAll('span');
+      if (spans.length > 0) {
+          // Remove the last <span> element
+          const lastSpan = spans[spans.length - 1];
+          lastSpan.remove();
+      }
+      return tempDiv.innerHTML
+    })
   }
+
+
 
 function handleEnterClick() {
     setText(prevText => prevText + "</br>");
