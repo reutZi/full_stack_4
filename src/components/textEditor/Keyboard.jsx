@@ -29,10 +29,9 @@ const Keyboard = ({ language , setText,style}) => {
       const tempDiv = document.createElement('div');
       tempDiv.innerHTML = text;
   
-      // Find all <span> elements
+      
       const spans = tempDiv.querySelectorAll('span');
       if (spans.length > 0) {
-          // Remove the last <span> element
           const lastSpan = spans[spans.length - 1];
           lastSpan.remove();
       }
@@ -40,6 +39,9 @@ const Keyboard = ({ language , setText,style}) => {
     })
   }
 
+  function handleclear(){
+    setText("");
+  }
 
 
 function handleEnterClick() {
@@ -53,6 +55,8 @@ function handleSpClick(){
 return (
   <div className={classes.Keys}>
     <button key="del" onClick ={handleDelClick}>Del</button>
+    <button key="clear" onClick ={handleclear}>clear</button>
+
     {keys.map(key => (
       <button key={key} onClick ={handleButtonClick}>{key}</button>
     ))}
