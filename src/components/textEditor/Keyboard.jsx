@@ -17,7 +17,6 @@ const Keyboard = ({ language , setText,style}) => {
     let fontFamily = style.fontFamily;
     let fontSize = style.fontSize;
     setText(prevText => prevText + `<span style="color:${color}; font-weight:${fontWeight}; font-family:${fontFamily}; font-size:${fontSize};">${e.target.innerHTML}</span>`);
-    //setText(prevText => prevText + e.target.innerHTML)
   }
 
 

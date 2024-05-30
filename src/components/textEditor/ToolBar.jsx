@@ -8,7 +8,7 @@ const ToolBar = ({ setStyle }) => {
   function unDo(){
     if(last_stages.length > 1 ){
         last_stages.pop();
-    }
+    
         switch(last_stages.at(-1).prop){
           case "font_size":
             console.log(last_stages)
@@ -31,7 +31,7 @@ const ToolBar = ({ setStyle }) => {
           break;
           default:
         
-
+       }
     }
   }
 
