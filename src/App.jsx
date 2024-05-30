@@ -20,6 +20,7 @@ function App() {
       setNewGame(false);
       setGameBoard(false);
       setShowButtons(false);
+      setPlayers([]);
     }
   }
 
