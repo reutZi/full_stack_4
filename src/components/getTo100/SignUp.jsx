@@ -14,7 +14,7 @@ function SignUp({ submit, openNewGame }) {
 
     return (
         <div className={classes.registration}>
-            <h3>Sign In For the Game</h3>
+            <h3>Sign Up For the Game</h3>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="userName">
                     Username:
@@ -60,7 +60,7 @@ function SignUp({ submit, openNewGame }) {
             </form>
             <p>Already have an account?
                 <button className={classes.buttonA} onClick={openNewGame}>
-                    Sign up
+                    Sign in
                 </button>
             </p>
         </div>
